@@ -25,49 +25,51 @@ class UntitledTestCase(unittest.TestCase):
     def return_to_homepage(self, wd):
         wd.find_element_by_link_text("home page").click()
 
-    def fill_form_contact(self, wd):
+    def fill_form_contact(self, wd, firstname="name1", middlename="name2", lastname="name3", nickname="testname",
+                          company="company", address="address", home_number="9377722", mob_number="23455552525",
+                          work_number="2131231", EMail="test@test,com", bday="4", bmonth="March", byear="1988"):
         #fill_form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys("name1")
+        wd.find_element_by_name("firstname").send_keys(firstname)
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
-        wd.find_element_by_name("middlename").send_keys("name2")
+        wd.find_element_by_name("middlename").send_keys(middlename)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("name3")
+        wd.find_element_by_name("lastname").send_keys(lastname)
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
-        wd.find_element_by_name("nickname").send_keys("testname")
+        wd.find_element_by_name("nickname").send_keys(nickname)
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("company")
+        wd.find_element_by_name("company").send_keys(company)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys("address")
+        wd.find_element_by_name("address").send_keys(address)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys("9377722")
+        wd.find_element_by_name("home").send_keys(home_number)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys("23455552525")
+        wd.find_element_by_name("mobile").send_keys(mob_number)
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys("2131231")
+        wd.find_element_by_name("work").send_keys(work_number)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("test@test,com")
+        wd.find_element_by_name("email").send_keys(EMail)
         wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text("4")
+        Select(wd.find_element_by_name("bday")).select_by_visible_text(bday)
         wd.find_element_by_name("bday").click()
         wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text("March")
+        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(bmonth)
         wd.find_element_by_name("bmonth").click()
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys("1988")
+        wd.find_element_by_name("byear").send_keys(byear)
         #add_contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
@@ -97,21 +99,10 @@ class UntitledTestCase(unittest.TestCase):
         try: self.wd.switch_to_alert()
         except NoAlertPresentException as e: return False
         return True
-    
-    def close_alert_and_get_its_text(self):
-        try:
-            alert = self.wd.switch_to_alert()
-            alert_text = alert.text
-            if self.accept_next_alert:
-                alert.accept()
-            else:
-                alert.dismiss()
-            return alert_text
-        finally: self.accept_next_alert = True
-    
+
     def tearDown(self):
         self.wd.quit()
-        self.assertEqual([], self.verificationErrors)
+
 
 if __name__ == "__main__":
     unittest.main()
