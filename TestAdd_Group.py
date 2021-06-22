@@ -12,19 +12,13 @@ class TestAddGroup(unittest.TestCase):
         self.wd.implicitly_wait(30)
     
     def test_add_group(self):
-        wd = self.open_home_page()
         self.login(wd, username="admin", password="secret")
-        self.open_groups(wd)
         self.create_group(wd, Group(name="test", header="test", footer="test"))
-        self.return_to_group_page(wd)
         self.logout(wd)
 
     def test_add_empty_group(self):
-        wd = self.open_home_page()
         self.login(wd, username="admin", password="secret")
-        self.open_groups(wd)
         self.create_group(wd, Group(name="", header="", footer=""))
-        self.return_to_group_page(wd)
         self.logout(wd)
 
     def open_home_page(self):
@@ -33,6 +27,7 @@ class TestAddGroup(unittest.TestCase):
         return wd
 
     def login(self, wd, username, password):
+        wd = self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -44,6 +39,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_link_text("groups").click()
 
     def create_group(self, wd, Group):
+        self.open_groups(wd
         # init_groups_creation
         wd.find_element_by_name("new").click()
         #fill_group_form
@@ -58,6 +54,7 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("group_footer").send_keys(Group.footer)
         #submit_group_creation
         wd.find_element_by_name("submit").click()
+        self.return_to_group_page(wd
 
     def return_to_group_page(self, wd):
         wd.find_element_by_link_text("group page").click()

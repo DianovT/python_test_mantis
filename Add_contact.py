@@ -28,7 +28,7 @@ class UntitledTestCase(unittest.TestCase):
             mob_number="23455552525",
             work_number="2131231",
             EMail="test@test,com",
-            bday="4", 
+            bday="4",
             bmonth="March",
             byear="1988"))
         self.return_to_homepage(wd)
