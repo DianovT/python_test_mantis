@@ -4,7 +4,6 @@ from model.contact import contact
 
     
 def test_add_contact(app):
-        app.session.login(username="admin", password="secret")
         app.contact.fill_new_form(contact(
             firstname="name1",
             middlename="name2",
@@ -19,5 +18,4 @@ def test_add_contact(app):
             bday="4",
             bmonth="March",
             byear="1988"))
-        app.session.logout()
 
