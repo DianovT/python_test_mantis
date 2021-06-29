@@ -4,7 +4,9 @@ from model.contact import contact
 
 
 def test_edit_first_contact(app):
-    app.contact.edit_first_contact(contact(
+    if app.contact.count() == 0:
+        app.contact.fill_new_form(contact(firstname="test",lastname="test",bday="9"))
+    app.contact.modify_first_contact(contact(
         firstname="firstname",
         middlename="middlename",
         lastname="lastname",

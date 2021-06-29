@@ -43,7 +43,7 @@ class GroupHelper:
         wd.find_element_by_name("delete").click()
         self.return_to_group_page()
 
-    def edit_first_group(self, new_group_date):
+    def modify_first_group(self, new_group_date):
         wd = self.app.wd
         self.open_groups()
         #select first group
@@ -63,3 +63,8 @@ class GroupHelper:
     def return_to_group_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
+
+    def count(self):
+        wd = self.app.wd
+        self.open_groups()
+        return len(wd.find_elements_by_name("selected[]"))
