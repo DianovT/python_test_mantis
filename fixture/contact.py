@@ -80,7 +80,7 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         # edit first contact
-        self.edit_contact_by_index(index)
+        self.open_contact_edit_page_by_index(index)
         self.fill_form(contact)
         # accept edit
         wd.find_element_by_css_selector('input[value="Update"]').click()
@@ -91,7 +91,7 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
 
-    def edit_contact_by_index(self, index):
+    def open_contact_edit_page_by_index(self, index):
         wd = self.app.wd
         self.open_home_page()
         row = wd.find_elements_by_name("entry")[index]
@@ -128,7 +128,7 @@ class ContactHelper:
 
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
-        self.edit_contact_by_index(index)
+        self.open_contact_edit_page_by_index(index)
         firstname = wd.find_element_by_name('firstname').get_attribute("value")
         lastname = wd.find_element_by_name('lastname').get_attribute("value")
         middlename = wd.find_element_by_name('middlename').get_attribute("value")

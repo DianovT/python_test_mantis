@@ -23,10 +23,12 @@ class Сontact:
         self.id = id
         self.all_phones_from_homepage = all_phones_from_homepage
         self.all_EMail_from_homepage = all_EMail_from_homepage
-        self.all_contact_from_homepage = all_contact_from_homepage
 
     def __repr__(self):
-        return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
+        return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:" % (
+            self.id, self.firstname, self.lastname, self.middlename, self.nickname,
+                             self.company,self.address,self.home_phone,self.mob_phone,self.work_phone
+                             ,self.second_phone,self.EMail)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \

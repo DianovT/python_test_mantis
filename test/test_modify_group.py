@@ -1,15 +1,28 @@
 from model.group import Group
 from random import randrange
+import pytest
+import random
+import string
+
+
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10
+    return prefix + "".join ([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 
+testdate = [Group(name="", header="", footer="")] + [
+    Group(name=random_string("name", 6), header=random_string("header", 10), footer=random_string("footer", 15))
+    for i in range(3)
+]
 
-def test_edit_group_name(app):
+@pytest.mark.parametrize("group", testdate, ids=[repr(x) for x in testdate])
+def test_edit_group_name(app, group):
     if app.group.count() == 0:
-        app.group.create(Group(name="test", header="test" ))
+        app.group.create(group)
     old_groups = app.group.get_group_list()
     index = randrange(len(old_groups))
-    groups = Group(name="edit_test")
+    groups = group
     groups.id = old_groups[index].id
     app.group.modify_group_by_index(index, groups)
     assert len(old_groups) == app.group.count()
