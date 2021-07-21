@@ -3,7 +3,7 @@ from sys import maxsize
 class Сontact:
     def __init__(self, firstname=None, middlename=None, lastname=None, nickname=None, company=None, address=None, home_phone=None,
                  mob_phone=None, work_phone=None, EMail=None, bday=None, bmonth=None, byear=None, id=None,
-                 second_phone=None):
+                 second_phone=None, all_phones_from_homepage=None):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
@@ -19,6 +19,7 @@ class Сontact:
         self.bmonth = bmonth
         self.byear = byear
         self.id = id
+        self.all_phones_from_homepage = all_phones_from_homepage
 
     def __repr__(self):
         return "%s:%s:%s" % (self.id, self.firstname, self.lastname)
