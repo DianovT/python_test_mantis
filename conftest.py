@@ -1,22 +1,23 @@
+
 from model.group import Group
 from fixture.application import Application
 import pytest
+import json
 
 fixture = None
+target = None
 
 @pytest.fixture
 def app(request):
     global fixture
+    global target
     browser = request.config.getoption("--browser")
-    base_url = request.config.getoption("--baseUrl")
-    password = request.config.getoption("--pass")
-    username = request.config.getoption("--user")
-    if fixture is None:
-        fixture = Application(browser=browser, base_url=base_url)
-    else:
-        if not fixture.is_valid():
-            fixture = Application(browser=browser, base_url=base_url)
-    fixture.session.insure_login(username=username, password=password)
+    if target is None:
+        with open(request.config.getoption("--target")) as config_file:
+            target = json.load(config_file)
+    if fixture is None or fixture.is_valid():
+        fixture = Application(browser=browser, base_url=target['baseUrl'])
+    fixture.session.insure_login(username=target['username'], password=target['password'])
     return fixture
 
 
@@ -30,8 +31,6 @@ def stop(request):
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="firefox")
-    parser.addoption("--baseUrl", action="store", default="http://localhost/addressbook")
-    parser.addoption("--pass", action="store", default="secret")
-    parser.addoption("--user", action="store", default="admin")
+    parser.addoption("--target", action="store", default="target.json")
 
 
