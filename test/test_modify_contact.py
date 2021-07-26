@@ -3,8 +3,8 @@ from random import randrange
 
 
 
-def test_modify_some_contact(app, data_contacts):
-    contact = data_contacts
+def test_modify_some_contact(app, json_contacts):
+    contact = json_contacts
     if app.contact.count() == 0:
         app.contact.fill_new_form(contact)
     old_contacts = app.contact.get_contact_list()

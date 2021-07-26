@@ -2,8 +2,8 @@ from model.group import Group
 from random import randrange
 
 
-def test_edit_group_name(app, data_groups):
-    group = data_groups
+def test_edit_group_name(app, json_groups):
+    group = json_groups
     if app.group.count() == 0:
         app.group.create(group)
     old_groups = app.group.get_group_list()
