@@ -3,6 +3,7 @@ import pytest
 import json
 import os.path
 import importlib
+import jsonpickle
 
 fixture = None
 target = None
@@ -39,11 +40,20 @@ def pytest_addoption(parser):
 def pytest_generate_tests(metafunc):
     for fixture in metafunc.fixturenames:
         if fixture.startswith("data_"):
-            testdate = load_form_module(fixture[5:])
+            testdate = load_from_module(fixture[5:])
+            metafunc.parametrize(fixture, testdate, ids=[str(x) for x in testdate])
+        elif fixture.startswith("json_"):
+            testdate = load_from_json(fixture[5:])
             metafunc.parametrize(fixture, testdate, ids=[str(x) for x in testdate])
 
 
-def load_form_module(module):
+def load_from_module(module):
     return importlib.import_module("data.%s" % module).testdate
+
+def load_from_json(file):
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), ("data/%s.json" % file))) as f:
+        return jsonpickle.decode(f.read())
+
+
 
 
