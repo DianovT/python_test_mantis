@@ -3,7 +3,7 @@ from sys import maxsize
 class Сontact:
     def __init__(self, firstname=None, middlename=None, lastname=None, nickname=None, company=None, address=None, home_phone=None,
                  mob_phone=None, work_phone=None, EMail=None, EMail2=None, EMail3=None, bday=None, bmonth=None, byear=None, id=None,
-                 second_phone=None, all_phones_from_homepage=None, all_EMail_from_homepage=None, all_contact_from_homepage=None):
+                 second_phone=None, all_phones_from_homepage=None, all_EMail_from_homepage=None):
         self.firstname = firstname
         self.middlename = middlename
         self.lastname = lastname
