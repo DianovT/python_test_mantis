@@ -1,4 +1,4 @@
-from model.contact import Сontact
+from model.contact import Contact
 import random
 import string
 import os.path
@@ -32,8 +32,8 @@ def random_number(prefix, maxlen):
 
 
 
-testdate = [Сontact(firstname="", middlename="", lastname="")] + [
-    Сontact(
+testdate = [Contact(firstname="", middlename="", lastname="")] + [
+    Contact(
             firstname=random_string("firstname", 6),
             middlename=random_string("middlename", 8),
             lastname=random_string("lastname", 10),

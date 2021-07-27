@@ -1,4 +1,4 @@
-from model.contact import Сontact
+from model.contact import Contact
 from random import randrange
 
 
@@ -15,7 +15,7 @@ def test_modify_some_contact(app, json_contacts):
     assert len(old_contacts) == app.contact.count()
     new_contacts = app.contact.get_contact_list()
     old_contacts[index] = modify_contact
-    assert sorted(old_contacts, key=Сontact.id_or_max) == sorted(new_contacts, key=Сontact.id_or_max)
+    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
 
 

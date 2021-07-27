@@ -1,5 +1,5 @@
 from selenium.webdriver.support.ui import Select
-from model.contact import Сontact
+from model.contact import Contact
 import re
 
 
@@ -122,7 +122,7 @@ class ContactHelper:
                 id = cells[0].find_element_by_name("selected[]").get_attribute("value")
                 all_phone = cells[5].text
                 all_EMail = cells[4].text
-                self.contact_cache.append(Сontact(lastname=last_name, firstname=first_name, address=address, id=id,
+                self.contact_cache.append(Contact(lastname=last_name, firstname=first_name, address=address, id=id,
                                                   all_phones_from_homepage=all_phone, all_EMail_from_homepage = all_EMail))
         return list(self.contact_cache)
 
@@ -141,18 +141,18 @@ class ContactHelper:
         mobilephone = wd.find_element_by_name('mobile').get_attribute("value")
         workphone = wd.find_element_by_name('work').get_attribute("value")
         secondaryphone = wd.find_element_by_name('phone2').get_attribute("value")
-        return Сontact(firstname=firstname,
+        return Contact(firstname=firstname,
                        lastname = lastname,
-                        middlename=middlename,
-                        address=address,
-                        EMail=email,
-                        EMail2=email2,
-                        EMail3=email3,
-                        id=id,
-                        home_phone=homephone,
-                        mob_phone=mobilephone,
-                        work_phone=workphone,
-                        second_phone=secondaryphone)
+                       middlename=middlename,
+                       address=address,
+                       EMail=email,
+                       EMail2=email2,
+                       EMail3=email3,
+                       id=id,
+                       home_phone=homephone,
+                       mob_phone=mobilephone,
+                       work_phone=workphone,
+                       second_phone=secondaryphone)
 
     def open_contact_view_by_index(self, index):
         wd = self.app.wd
@@ -169,10 +169,10 @@ class ContactHelper:
         mobilephone = re.search("M: (.*)", text).group(1)
         workphone = re.search("W: (.*)", text).group(1)
         secondaryphone = re.search("P: (.*)", text).group(1)
-        return Сontact(home_phone=homephone,
-                        mob_phone=mobilephone,
-                        work_phone=workphone,
-                        second_phone=secondaryphone)
+        return Contact(home_phone=homephone,
+                       mob_phone=mobilephone,
+                       work_phone=workphone,
+                       second_phone=secondaryphone)
 
 
 

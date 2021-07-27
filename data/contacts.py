@@ -1,10 +1,10 @@
-from model.contact import Сontact
+from model.contact import Contact
 
 
 
 testdate = [
-    Сontact(firstname="", middlename="", lastname=""),
-    Сontact(firstname="firstname",
+    Contact(firstname="", middlename="", lastname=""),
+    Contact(firstname="firstname",
             middlename="middlename",
             lastname="lastname",
             company="company",
