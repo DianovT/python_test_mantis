@@ -17,18 +17,9 @@ def app(request):
         config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), request.config.getoption("--target"))
         with open(config_file) as f:
             target = json.load(f)
-    if fixture is None or fixture.is_valid():
+    if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, base_url=target['baseUrl'])
     fixture.session.insure_login(username=target['username'], password=target['password'])
-    return fixture
-
-
-@pytest.fixture(scope="session", autouse=True)
-def stop(request):
-    def fin():
-        fixture.session.insure_logout()
-        fixture.destroy()
-    request.addfinalizer(fin)
     return fixture
 
 
@@ -53,6 +44,15 @@ def load_from_module(module):
 def load_from_json(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), ("data/%s.json" % file))) as f:
         return jsonpickle.decode(f.read())
+
+
+@pytest.fixture(scope="session", autouse=True)
+def stop(request):
+    def fin():
+        fixture.session.insure_logout()
+        fixture.destroy()
+    request.addfinalizer(fin)
+    return fixture
 
 
 
