@@ -1,6 +1,6 @@
 from model.group import Group
 from random import randrange
-
+import random
 
 def test_edit_group_name(app, json_groups):
     group = json_groups
@@ -22,5 +22,6 @@ def test_edit_group_name(app, json_groups):
 #    app.group.modify_first_group(Group(header="edit_test"))
 #    new_groups = app.group.get_group_list()
 #    assert len(old_groups) == len(new_groups)
+
 
 
