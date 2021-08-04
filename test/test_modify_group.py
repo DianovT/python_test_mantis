@@ -2,20 +2,21 @@ from model.group import Group
 from random import randrange
 import random
 
-def test_edit_group_name(app, json_groups):
+def test_edit_group_name(app, db, check_ui, json_groups):
     group = json_groups
-    if app.group.count() == 0:
+    if len(db.get_group_list()) == 0:
         app.group.create(group)
     old_groups = app.group.get_group_list()
-    index = randrange(len(old_groups))
-    groups = group
-    groups.id = old_groups[index].id
-    app.group.modify_group_by_index(index, groups)
+    choice_group = random.choice(old_groups)
+    index = old_groups.index(choice_group)
+    modify_group = group
+    app.group.modify_group_by_id(choice_group.id, modify_group)
     assert len(old_groups) == app.group.count()
     new_groups = app.group.get_group_list()
-    old_groups[index] = groups
-    assert sorted(old_groups, key=Group.id_or_max) == sorted(new_groups, key=Group.id_or_max)
-
+    old_groups[index] = modify_group
+    assert old_groups == new_groups
+    if check_ui:
+        assert sorted(new_groups, key=Group.id_or_max) == sorted(app.group.get_group_list(), key=Group.id_or_max)
 
 #def test_edit_group_header(app):
 #    old_groups = app.group.get_group_list()

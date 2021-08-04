@@ -1,21 +1,22 @@
 from model.contact import Contact
-from random import randrange
+import random
 
 
-
-def test_modify_some_contact(app, json_contacts):
+def test_modify_some_contact(app, db, check_ui, json_contacts):
     contact = json_contacts
-    if app.contact.count() == 0:
+    if len(db.get_contact_list()) == 0:
         app.contact.fill_new_form(contact)
-    old_contacts = app.contact.get_contact_list()
-    index = randrange(len(old_contacts))
+    old_contacts = db.get_contact_list()
+    choice_contact = random.choice(old_contacts)
+    index = old_contacts.index(choice_contact)
     modify_contact = contact
-    modify_contact.id = old_contacts[index].id
-    app.contact.modify_contact_by_index(index, modify_contact)
+    app.contact.modify_contact_by_id(choice_contact.id, modify_contact)
     assert len(old_contacts) == app.contact.count()
-    new_contacts = app.contact.get_contact_list()
+    new_contacts = db.get_contact_list()
     old_contacts[index] = modify_contact
-    assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
+    assert old_contacts == new_contacts
+    if check_ui:
+        assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(),key=Contact.id_or_max)
 
 
 
