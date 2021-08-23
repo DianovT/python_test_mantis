@@ -27,7 +27,6 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.contact_cache = None
 
-
     def fill_form(self, contact):
         wd = self.app.wd
         self.change_field_value("firstname", contact.firstname)

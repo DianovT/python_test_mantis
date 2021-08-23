@@ -24,6 +24,7 @@ class Contact:
         self.all_phones_from_homepage = all_phones_from_homepage
         self.all_EMail_from_homepage = all_EMail_from_homepage
 
+
     def __repr__(self):
         return "%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:" % (
             self.id, self.firstname, self.lastname, self.middlename, self.nickname,
