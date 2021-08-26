@@ -1,4 +1,4 @@
-from model.project import Project
+from model.group import Group
 import random
 import string
 import os.path
@@ -8,13 +8,13 @@ import sys
 
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of project", "file"])
+    opts, args = getopt.getopt(sys.argv[1:], "n:f:", ["number of groups", "file"])
 except getopt.GetoptError as err:
     getopt.usage()
     sys.exit(2)
 
 n = 5
-f = "data/project.json"
+f = "data/groups.json"
 
 for o, a in opts:
     if o == "-n":
@@ -28,8 +28,8 @@ def random_string(prefix, maxlen):
 
 
 
-testdate = [Project(project_name="", status="", categories="", view_status="", description="")] + [
-    Project(project_name=random_string("name", 6), status=random_string("header", 10), categories=random_string("footer", 15))
+testdate = [Group(name="", header="", footer="")] + [
+    Group(name=random_string("name", 6), header=random_string("header", 10), footer=random_string("footer", 15))
     for i in range(n)
 ]
 
